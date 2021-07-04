@@ -1,0 +1,156 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace shweta
+{
+    class Class1
+    {
+        static void move(int[] c, int sqrt_value)
+        {
+            display(c, sqrt_value);
+
+            Console.WriteLine("enter the key");
+            int key;
+            while (true)
+            {
+              key = int.Parse(Console.ReadLine());
+                int move, temp = 0, position;
+                if (key == 2 || key == 4 || key == 6 || key == 8)
+                {
+
+
+                    if (key == 6)
+                    {
+                        position = Array.IndexOf(c, 1);
+                        if ((position+1) % sqrt_value==0)
+                        {
+                            Console.WriteLine("Can't shift right");
+                        }
+                        else
+                        {
+                            move = position;
+
+                            temp = c[move];
+                            c[move] = c[move + 1];
+                            c[move + 1] = temp;
+                        }
+                    }
+
+                    else if (key == 2)
+                    {
+                        position = Array.IndexOf(c, 1);
+                        if (position>=(c.Length-sqrt_value)&&position<c.Length)
+                        {
+                            Console.WriteLine("Can't shift down");
+                        }
+                        else
+                        {
+                            move = position;
+
+                            temp = c[move];
+                            c[move] = c[move + sqrt_value];
+                            c[move + sqrt_value] = temp;
+                        }
+
+                    }
+                    else if (key == 8)
+                    {
+                        position = Array.IndexOf(c, 1);
+                        if ((0<=position)&&(position<sqrt_value))
+                        {
+                            Console.WriteLine("Can't shift up");
+                        }
+                        else
+                        {
+
+
+                            move = position;
+
+                            temp = c[move];
+                            c[move] = c[move - sqrt_value];
+                            c[move - sqrt_value] = temp;
+
+                        }
+                    }
+                    else
+                    {
+
+
+                        position = Array.IndexOf(c, 1);
+                        
+                        if (position % sqrt_value==0)
+                        {
+                            Console.WriteLine("Can't shift left");
+                        }
+                        else
+                        {
+
+
+                            move = position;
+
+                            temp = c[move];
+                            c[move] = c[move + -1];
+                            c[move + -1] = temp;
+
+                        }
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("Invalid Key");
+                }
+                display(c, sqrt_value);
+                
+            }
+
+        }
+        static void display(int[] op, int sqrt_value)
+        {
+            int value = 0;
+            Console.WriteLine("--------------------------------------------------------------------------");
+            for (int i = 0; i < op.Length; i++)
+            {
+                if (value < sqrt_value)
+                {
+                    Console.Write(op[i] + "\t");
+                    value++;
+                }
+                else
+                {
+                    Console.WriteLine("");
+                    Console.Write(op[i] + "\t");
+                    value=1;
+                }
+            }
+            Console.WriteLine("");
+
+
+            Console.WriteLine("--------------------------------------------------------------------------");
+        }
+
+        static void Main(string[] args)
+        {
+            int button;
+            Console.WriteLine("Enter the size of Array");
+            
+            button = int.Parse(Console.ReadLine());
+            int array_size = button;
+            int[] arr = new int[array_size];
+            int sqrt_value = (int)Math.Sqrt(array_size);
+            for (int i = 0; i < arr.Length; i++)
+            { 
+                if (i == 0)
+                    arr[0] = 1;
+                else
+                    arr[i] = 0;
+            }
+            Console.WriteLine("array is =");
+            move(arr, sqrt_value);
+        }
+    }
+}
+
